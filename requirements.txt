@@ -7,3 +7,4 @@ django-widget-tweaks==1.4.12
 
 # For handling environment variables (if needed)
 python-dotenv==0.19.2
+django-unfold
