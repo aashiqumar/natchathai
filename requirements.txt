@@ -5,11 +5,5 @@ Pillow==8.3.2
 django-crispy-forms==1.13.0
 django-widget-tweaks==1.4.12
 
-# Additional packages for frontend and other functionalities
-jquery==3.7.1
-slick-carousel==1.8.1
-bootstrap==5.2.3
-fontawesome-free==5.15.4
-
 # For handling environment variables (if needed)
 python-dotenv==0.19.2
