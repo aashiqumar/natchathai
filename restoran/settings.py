@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fe2vx@8=brp&&vy-$f#sstr56-pk6=wl+(^vc0-*1_sr8la1^2'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -95,11 +99,11 @@ WSGI_APPLICATION = 'restoran.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.fxfwnabrmtjxgngoieyo',
-        'PASSWORD': 'Natchathaiweb1#',
-        'HOST': 'aws-0-ap-southeast-2.pooler.supabase.com',
-        'PORT': '6543',  # Default PostgreSQL port
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -135,19 +139,15 @@ USE_I18N = True
 USE_TZ = True
 
 # S3 
-# Access Key = af7198886995a4132e8a343cf6ff7411
-# Secret Access = bd4d3a4ede03c1ac2a76e66fe29887904b69c190c1326ef8b5f9606f1da79d27
-
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'af7198886995a4132e8a343cf6ff7411'
-AWS_SECRET_ACCESS_KEY = 'bd4d3a4ede03c1ac2a76e66fe29887904b69c190c1326ef8b5f9606f1da79d27'
-AWS_STORAGE_BUCKET_NAME = 'natcha'
-AWS_S3_ENDPOINT_URL = 'https://fxfwnabrmtjxgngoieyo.supabase.co/storage/v1/'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = os.getenv('AWS_S3_ENDPOINT_URL')
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'public/natcha'
+AWS_LOCATION = os.getenv('AWS_LOCATION')
 
 MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/object/{AWS_LOCATION}/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
