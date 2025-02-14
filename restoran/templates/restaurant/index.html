@@ -232,33 +232,37 @@
         </div>
     </section>
 
-    <section class="our-menu py-5 my-5" id="our-menu">
-      <div class="container">
-        <div class="row" data-aos="fade-right">
-          <div class="section-title text-center">
-            <h5>Our Menu</h5>
-            <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
+   <!-- Existing Our Menu section (hidden) -->
+<section class="our-menu py-5 my-5" id="our-menu" style="display: none;">
+  <div class="container">
+    <div class="row" data-aos="fade-right">
+      <div class="section-title text-center">
+        <h5>Our Menu</h5>
+        <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
+      </div>
+    </div>
+    <div id="our-menus" class="slider">
+      {% for food in food_items %}
+      <div class="food-item hidden">
+        <div class="row my-5 py-1 justify-content-center align-items-center">
+          <div class="col-lg-2">
+            <div style="width: 400px;">
+              {% if food.image %}
+                <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
+              {% elif food.image_url %}
+                <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
+              {% else %}
+                <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
+              {% endif %}
+            </div>
           </div>
-        </div>
-        <div class="row">
-          {% for food in food_items %}
-          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div class="card h-100 shadow-sm border-0">
-              <div class="card-img-top position-relative">
-                {% if food.image %}
-                  <img src="{{ food.image.url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
-                {% elif food.image_url %}
-                  <img src="{{ food.image_url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
-                {% else %}
-                  <img src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
-                {% endif %}
-                <div class="overlay d-flex align-items-center justify-content-center">
-                  <h5 class="text-white">{{ food.name }}</h5>
-                </div>
+          <div class="col-lg-7">
+            <div class="item-wrapper d-flex justify-content-between">
+              <div class="item-left">
+                <h5>{{ food.name }}</h5>
+                <p>{{ food.description }}</p>
               </div>
-              <div class="card-body text-center">
-                <h5 class="card-title">{{ food.name }}</h5>
-                <p class="card-text">{{ food.description }}</p>
+              <div class="item-right">
                 {% if food.price %}
                   <span class="item-price">
                     <span class="price-symbol">$</span>
@@ -270,51 +274,97 @@
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
       </div>
-    </section>
-    
-    <style>
-      .card {
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-    
-      .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-    
-      .card-img-top {
-        position: relative;
-      }
-    
-      .card-img-top .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        transition: opacity 0.2s;
-      }
-    
-      .card-img-top:hover .overlay {
-        opacity: 1;
-      }
-    
-      .item-price {
-        font-size: 1.2rem;
-        color: #333;
-        font-weight: bold;
-      }
-    
-      .price-symbol {
-        font-size: 1rem;
-        color: #999;
-      }
-    </style>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- New Our Menu section -->
+<section class="new-our-menu py-5 my-5" id="new-our-menu">
+  <div class="container">
+    <div class="row" data-aos="fade-right">
+      <div class="section-title text-center">
+        <h5>Our Menu</h5>
+        <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
+      </div>
+    </div>
+    <div class="row">
+      {% for food in food_items %}
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-img-top position-relative">
+            {% if food.image %}
+              <img src="{{ food.image.url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+            {% elif food.image_url %}
+              <img src="{{ food.image_url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+            {% else %}
+              <img src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+            {% endif %}
+            <div class="overlay d-flex align-items-center justify-content-center">
+              <h5 class="text-white">{{ food.name }}</h5>
+            </div>
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ food.name }}</h5>
+            <p class="card-text">{{ food.description }}</p>
+            {% if food.price %}
+              <span class="item-price">
+                <span class="price-symbol">$</span>
+                {{ food.price }}
+              </span>
+            {% else %}
+              <span class="item-price">Price not available</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-img-top {
+    position: relative;
+  }
+
+  .card-img-top .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card-img-top:hover .overlay {
+    opacity: 1;
+  }
+
+  .item-price {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .price-symbol {
+    font-size: 1rem;
+    color: #999;
+  }
+</style>
 
   <section class="testimonials py-5 my-5">
     <div class="container py-5">
@@ -446,7 +496,7 @@
   </div>
 </section>
 
-<section class="our-ingredient py-5 my-5">
+<section class="our-menu py-5 my-5">
     <div class="container">
       <div class="row" data-aos="fade-right">
         <div class="section-title text-center">
@@ -506,7 +556,7 @@
           </div>
         </div>
   
-        <div class="slider" data-aos="fade-up">
+        <div id="our-menus" class="slider" data-aos="fade-up">
           <div class="row my-5 py-3">
             <div class="col-lg-5">
               <div class="pb-5 pb-lg-0">
@@ -683,7 +733,7 @@
     </a>
 
     
-    <footer id="contact">
+    <footer>
       <div class="container"> 
         <div class="row">
             <div class="footer-content col-xl-8 px-4">
@@ -692,7 +742,7 @@
                         <div class="logo" data-aos="fade-down-right">
                             <a href="./index.html">
                                 <i class="fa fa-utensils me-3"></i>
-                                <h1 class="mb-0">Natchathai</h1>
+                                <h1 class="mb-0">Restoran</h1>
                             </a>
                         </div>
                     </div>
@@ -759,7 +809,7 @@
     ></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{% static 'assets/js/script.js' %}"></script>
-  
+   
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -772,6 +822,44 @@
         });
     </script>
   
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyImages = document.querySelectorAll('.lazy');
+      const lazyLoad = function() {
+        lazyImages.forEach(img => {
+          if (img.getBoundingClientRect().top < window.innerHeight && img.getBoundingClientRect().bottom > 0 && getComputedStyle(img).display !== 'none') {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+          }
+        });
+      };
+  
+      lazyLoad(); // Initial load
+      document.addEventListener('scroll', lazyLoad);
+      window.addEventListener('resize', lazyLoad);
+      window.addEventListener('orientationchange', lazyLoad);
+    });
+  </script>
+
+<script>
+  function longRunningTask() {
+    // Example of breaking up a long-running task
+    let i = 0;
+    function step() {
+      if (i < 1000) {
+        // Perform a small part of the task
+        console.log(i);
+        i++;
+        requestAnimationFrame(step);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    longRunningTask();
+  });
+</script>
   
   </body>
 </html>
