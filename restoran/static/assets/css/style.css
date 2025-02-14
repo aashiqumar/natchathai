@@ -1529,25 +1529,25 @@ header.scrolled {
 }
 
 .gallery-image-one {
-  background-image: url("./../images/gallery-1.jpg");
+  background-image: url("{% static 'assets/images/gallery-1.jpg' %}");
 }
 
 .gallery-image-two {
   width: 100%;
   height: 325px;
   background-position: center;
-  background-image: url("./../images/gallery-2.jpg");
+  background-image: url("{% static 'assets/images/gallery-2.jpg' %}");
 }
 
 .gallery-image-three {
   width: 100%;
   height: 325px;
   background-position: center;
-  background-image: url("./../images/gallery-3.jpg");
+  background-image: url("{% static 'assets/images/gallery-3.jpg' %}");
 }
 
 .gallery-image-four {
-  background-image: url("./../images/gallery-4.jpg");
+  background-image: url("{% static 'assets/images/gallery-4.jpg' %}");
 }
 
 .gallery-image-five {
@@ -2527,4 +2527,34 @@ footer p {
 }
 .book-a-table:hover .anim-layer {
   left: 0;
+}
+
+.hidden {
+  display: block;
+}
+
+.slider-indicators {
+  position: relative;
+  cursor: pointer;
+}
+
+.slider-indicators.active {
+    border-radius: 20%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  background-color: #FFF; /* Example style for active state */
+}
+
+.slider-indicators::after {
+  content: '▼'; /* Arrow icon */
+  position: absolute;
+  top: 100%; /* Position below the indicator */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #000;
+  display: none;
+}
+
+.slider-indicators.active::after {
+  display: block;
 }

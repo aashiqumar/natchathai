@@ -232,67 +232,89 @@
         </div>
     </section>
 
-     <section class="our-menu py-5 my-5" id="our-menu">
-    <div class="container">
+    <section class="our-menu py-5 my-5" id="our-menu">
+      <div class="container">
         <div class="row" data-aos="fade-right">
-            <div class="section-title text-center">
-                <h5>Our Menu</h5>
-                <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
-            </div>
+          <div class="section-title text-center">
+            <h5>Our Menu</h5>
+            <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
+          </div>
         </div>
-        <div class="row position-relative">
-            <div class="slider slider-indicators-wrapper justify-content-center">
-                {% for menu in menu_items %}
-                <div class="slider-indicators" onclick="showFoodItems('{{ menu.name }}')">
-                    <div class="indicators-icon text-center">
-                        <i class="{{ menu.icon_class.value }} fa-2x"></i>
-                    </div>
-                    <div class="indicators-title text-center">
-                        <h5>{{ menu.name }}</h5>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        <div id="our-menus" class="slider">
+        <div class="row">
           {% for food in food_items %}
-          <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
-              <div class="row my-5 py-1 justify-content-center align-items-center">
-                  <div class="col-lg-2">
-                      <div style="width: 400px;">
-                          {% if food.image %}
-                              <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
-                          {% elif food.image_url %}
-                              <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
-                          {% else %}
-                              <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
-                          {% endif %}
-                      </div>
-                  </div>
-                  <div class="col-lg-7">
-                      <div class="item-wrapper d-flex justify-content-between">
-                          <div class="item-left">
-                              <h5>{{ food.name }}</h5>
-                              <p>{{ food.description }}</p>
-                          </div>
-                          <div class="item-right">
-                              {% if food.price %}
-                                  <span class="item-price">
-                                      <span class="price-symbol">$</span>
-                                      {{ food.price }}
-                                  </span>
-                              {% else %}
-                                  <span class="item-price">Price not available</span>
-                              {% endif %}
-                          </div>
-                      </div>
-                  </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div class="card-img-top position-relative">
+                {% if food.image %}
+                  <img src="{{ food.image.url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+                {% elif food.image_url %}
+                  <img src="{{ food.image_url }}" alt="{{ food.name }}" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+                {% else %}
+                  <img src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image" class="img-fluid rounded-top" style="width: 100%; height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="overlay d-flex align-items-center justify-content-center">
+                  <h5 class="text-white">{{ food.name }}</h5>
+                </div>
               </div>
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ food.name }}</h5>
+                <p class="card-text">{{ food.description }}</p>
+                {% if food.price %}
+                  <span class="item-price">
+                    <span class="price-symbol">$</span>
+                    {{ food.price }}
+                  </span>
+                {% else %}
+                  <span class="item-price">Price not available</span>
+                {% endif %}
+              </div>
+            </div>
           </div>
           {% endfor %}
+        </div>
       </div>
-    </div>
-</section>
+    </section>
+    
+    <style>
+      .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+    
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+    
+      .card-img-top {
+        position: relative;
+      }
+    
+      .card-img-top .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+    
+      .card-img-top:hover .overlay {
+        opacity: 1;
+      }
+    
+      .item-price {
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+      }
+    
+      .price-symbol {
+        font-size: 1rem;
+        color: #999;
+      }
+    </style>
 
   <section class="testimonials py-5 my-5">
     <div class="container py-5">
@@ -424,6 +446,185 @@
   </div>
 </section>
 
+<section class="our-ingredient py-5 my-5">
+    <div class="container">
+      <div class="row" data-aos="fade-right">
+        <div class="section-title text-center">
+          <h5>Our Ingredients</h5>
+          <h2 class="display-5 fw-bold"></h2>
+        </div>
+      </div>
+      <div class="row position-relative">
+        <div data-aos="fade-left" class="slider slider-indicators-wrapper justify-content-center">
+          <div class="slider-indicators text-center" onclick="showDescription('ginger')" id="ginger-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/ginger.jpg' %}" alt="Ginger" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Ginger | Khing</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('garlic')" id="garlic-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/garlic.jpg' %}" alt="Garlic" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Garlic | Kira Thiam</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('kaffir_lime')" id="kaffir_lime-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/lime.webp' %}" alt="Kaffir Lime" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Kaffir Lime | Makrut</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('sacred_basil')" id="sacred_basil-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/sacredbasil.jpg' %}" alt="Sacred Basil" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Sacred Basil | Ka-Phrao</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('galangal')" id="galangal-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/galangal.jpg' %}" alt="Galangal" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Galangal | Kha</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('chilli')" id="chilli-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/chilli.jpg' %}" alt="Chilli" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Chilli | Phrik</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('lime')" id="lime-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/limeonly.jpg' %}" alt="Lime" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Lime | Ma'nao</h5>
+            </div>
+          </div>
+          <div class="slider-indicators text-center" onclick="showDescription('lemongrass')" id="lemongrass-indicator">
+            <img style="width: 80px; height: 80px; display: block; margin: 0 auto;" src="{% static 'assets/images/lemongrass.jpg' %}" alt="Lemongrass" class="small-img">
+            <div class="indicators-title text-center">
+              <h5>Lemongrass | Takhrai</h5>
+            </div>
+          </div>
+        </div>
+  
+        <div class="slider" data-aos="fade-up">
+          <div class="row my-5 py-3">
+            <div class="col-lg-5">
+              <div class="pb-5 pb-lg-0">
+                <img width="90%" src="./assets/images/menu-slider-dessert.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="row my-5 py-3">
+            <div class="d-flex justify-content-center">
+              <div class="col-lg-7">
+                <div id="ginger" class="item-wrapper text-center description">
+                  <div class="">
+                    <h5>Ginger | Khing</h5>
+                    <p>Ginger produces a hot, fragrant kitchen spice. Young ginger rhizomes are juicy and fleshy with a very mild taste. They are often pickled in vinegar or sherry as a snack or just cooked as an ingredient in many dishes.</p>
+                  </div>
+                </div>
+                <div id="garlic" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Garlic | Kira Thiam</h5>
+                    <p>Dried mature garlic bulbs are used as a flavouring and condiment in Thai cuisine. The bulbs contain 0.1 to 0.36% garlic oil and organic sulphur compounds. Therapeutic uses are as antimicrobial, diaphoretic, diuretic, expectorant, antiflatulence and cholesterol lowering agents.</p>
+                  </div>
+                </div>
+                <div id="kaffir_lime" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Kaffir Lime | Makrut</h5>
+                    <p>The leaves, peel and juice of the Kaffir Lime are used as a flavouring in Thai cuisine. The leaves and peel contain volatile oil. The major therapeutic benefit of the juice is an appetiser.</p>
+                  </div>
+                </div>
+                <div id="sacred_basil" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Sacred Basil | Ka-Phrao</h5>
+                    <p>Sacred Basil is an annual herbaceous plant that resembles Sweet Basil but has narrower and reddish-purple leaves. The fresh leaves, which are used as a flavouring, contain approximately 0.5% volatile oil, which exhibits antimicrobial activity, specifically as a carminative, diaphoretic, xpectorant and stomachic.</p>
+                  </div>
+                </div>
+                <div id="galangal" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Galangal | Kha</h5>
+                    <p>Greater Galanga commonly used in Thai cooking as a flavouring. The approximately 0.04% volatile oil content has therapeutic uses as carminative, stomachic, antirheumatic and antimicrobial agents.</p>
+                  </div>
+                </div>
+                <div id="chilli" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Chilli | Phrik</h5>
+                    <p>Chilli is used as garnishing and flavouring in Thai dishes. There are many different species. All contain capsaicin, a biolozically active ingredient beneficial to the respiratory system, blood pressure and heart. Other therapeutic uses include being a stomachic, carminative and antiflatulence agent and digestant.</p>
+                  </div>
+                </div>
+                <div id="lime" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Lime | Ma'nao</h5>
+                    <p>Lime is used principally as a gamish for fish and meat dishes. The fruit contains Hesperidin and Naringin, scientifically proven anti-inflammatory flavonoids. Lime juice is used as an appetiser, and has antitussive, antifu, stomachic and antiscorbutic properties.</p>
+                  </div>
+                </div>
+                <div id="lemongrass" class="item-wrapper text-center description" style="display: none;">
+                  <div class="">
+                    <h5>Lemongrass | Takhrai</h5>
+                    <p>This erect annual plant resembles a coarse grey green grass used as a flavouring. Lemongrass contains 0.2 - 0.4% volatile oil. Therapeutic properties are as a diuretic, emmanagogue, antiflatulence, antiflu and antimicrobial agent.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Default select Ginger | Khing
+      showDescription('ginger');
+      document.getElementById('ginger-indicator').classList.add('active');
+    });
+  
+    function showDescription(id) {
+      // Hide all descriptions
+      document.querySelectorAll('.description').forEach(function(desc) {
+        desc.style.display = 'none';
+      });
+      // Show the selected description
+      document.getElementById(id).style.display = 'block';
+  
+      // Remove active class from all indicators
+      document.querySelectorAll('.slider-indicators').forEach(function(indicator) {
+        indicator.classList.remove('active');
+      });
+      // Add active class to the selected indicator
+      document.getElementById(id + '-indicator').classList.add('active');
+    }
+  </script>
+  
+  <style>
+    .slider-indicators {
+      position: relative;
+      cursor: pointer;
+    }
+  
+    .slider-indicators.active {
+        border-radius: 20%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+      background-color: #FFF; /* Example style for active state */
+    }
+  
+    .slider-indicators::after {
+      content: '▼'; /* Arrow icon */
+      position: absolute;
+      top: 100%; /* Position below the indicator */
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #000;
+      display: none;
+    }
+  
+    .slider-indicators.active::after {
+      display: block;
+    }
+  </style>
+
 <section class="our-gallery pt-5">
   <div class="container-fluid pt-5">
     <div class="row">
@@ -434,28 +635,40 @@
     </div>
     <div class="row pt-5">
       <div class="col-md-3 p-0">
-        <div data-aos="fade-down-right" class="gallery-image gallery-image-one"></div>
+        <div data-aos="fade-down-right">
+          <img src="{% static 'assets/images/gallery-1.jpg' %}" alt="Gallery Image 1" class="img-fluid">
+        </div>
       </div>
       <div class="col-md-6 p-0">
         <div class="row m-0">
           <div class="col-md-8 p-0">
-            <div data-aos="fade-down" class="gallery-image-two"></div>
+            <div data-aos="fade-down">
+              <img src="{% static 'assets/images/gallery-2.jpg' %}" alt="Gallery Image 2" class="img-fluid" style="width: 100%; height: 325px; object-fit: cover;">
+            </div>
           </div>
           <div class="col-md-4 p-0">
-            <div data-aos="fade-down" class="gallery-image-three"></div>
+            <div data-aos="fade-down">
+              <img src="{% static 'assets/images/gallery-3.jpg' %}" alt="Gallery Image 3" class="img-fluid" style="width: 100%; height: 325px; object-fit: cover;">
+            </div>
           </div>
         </div>
         <div class="row m-0">
           <div class="col-md-4 p-0">
-            <div data-aos="fade-up" class="gallery-image-five"></div>
+            <div data-aos="fade-up">
+              <img src="{% static 'assets/images/gallery-5.jpg' %}" alt="Gallery Image 5" class="img-fluid" style="width: 100%; height: 325px; object-fit: cover;">
+            </div>
           </div>
           <div class="col-md-8 p-0">
-            <div data-aos="fade-up" class="gallery-image-six"></div>
+            <div data-aos="fade-up">
+              <img src="{% static 'assets/images/gallery-6.jpg' %}" alt="Gallery Image 6" class="img-fluid" style="width: 100%; height: 325px; object-fit: cover;">
+            </div>
           </div>
         </div>
       </div>
       <div class="col-md-3 p-0">
-        <div data-aos="fade-up-left" class="gallery-image gallery-image-four"></div>
+        <div data-aos="fade-up-left">
+          <img src="{% static 'assets/images/gallery-4.jpg' %}" alt="Gallery Image 4" class="img-fluid">
+        </div>
       </div>
     </div>
   </div>
@@ -470,7 +683,7 @@
     </a>
 
     
-    <footer>
+    <footer id="contact">
       <div class="container"> 
         <div class="row">
             <div class="footer-content col-xl-8 px-4">
@@ -479,7 +692,7 @@
                         <div class="logo" data-aos="fade-down-right">
                             <a href="./index.html">
                                 <i class="fa fa-utensils me-3"></i>
-                                <h1 class="mb-0">Restoran</h1>
+                                <h1 class="mb-0">Natchathai</h1>
                             </a>
                         </div>
                     </div>
@@ -533,7 +746,7 @@
             </div>
         </div>
         <div class="row">
-            <p class="text-center pt-4 mt-3 pt-lg-0">&copy; <span id="copyrightCurrentYear"></span> <b> Restoran.</b> All rights reserved. Design by Powered by<a href="https://www.ideafordge.com/" class="fw-bold author-name">Ideafordge</a></p>
+            <p class="text-center pt-4 mt-3 pt-lg-0">&copy; <span id="copyrightCurrentYear"></span> <b> Restoran.</b> All rights reserved. Designed & Powered by <a href="https://www.ideafordge.com/" class="fw-bold author-name">Ideafordge</a></p>
         </div>
     </div>
     </footer>
@@ -546,49 +759,7 @@
     ></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{% static 'assets/js/script.js' %}"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const originalFoodItems = Array.from(document.querySelectorAll('.food-item'));
-          const foodItemsByMenu = {
-              'Breakfast': [],
-              'Lunch': [],
-              'Dinner': [],
-              'Drinks': [],
-              'Ingredients': []
-          };
-      
-          // Populate the arrays based on the menu name
-          originalFoodItems.forEach(item => {
-              const itemMenuName = item.getAttribute('data-menu-name');
-              if (foodItemsByMenu[itemMenuName]) {
-                  foodItemsByMenu[itemMenuName].push(item);
-              }
-          });
-      
-          function showFoodItems(menuName) {
-              console.log('Selected menu:', menuName); // Debugging line
-              // Hide all items
-              originalFoodItems.forEach(item => {
-                  item.classList.add('hidden');
-              });
-      
-              // Show items based on the selected menu
-              const itemsToShow = foodItemsByMenu[menuName] || [];
-              itemsToShow.forEach(item => {
-                  item.classList.remove('hidden');
-                  console.log('Showing:', item.getAttribute('data-menu-name')); // Debugging line
-              });
-          }
-      
-          window.showFoodItems = showFoodItems; // Make the function globally accessible
-      
-          const firstMenu = document.querySelector('.slider-indicators'); // Select the first menu indicator
-          if (firstMenu) {
-              const initialMenuName = firstMenu.getAttribute('onclick').match(/'([^']+)'/)[1];
-              showFoodItems(initialMenuName);
-          }
-      });
-      </script>
+  
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
