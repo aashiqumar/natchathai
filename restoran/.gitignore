@@ -1,0 +1,43 @@
+# Ignore the .env file
+.env
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore Django migration files
+*/migrations/*
+
+# Ignore database files
+*.sqlite3
+
+# Ignore media files
+/media/
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.o
+*.so
+*.out
+*.class
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Ignore build directories
+build/
+dist/
+*.egg-info/

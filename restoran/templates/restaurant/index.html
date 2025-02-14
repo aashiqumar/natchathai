@@ -232,67 +232,67 @@
         </div>
     </section>
 
-      <section class="our-menu py-5 my-5" id="our-menu">
-        <div class="container">
-            <div class="row" data-aos="fade-right">
-                <div class="section-title text-center">
-                    <h5>Our Menu</h5>
-                    <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
-                </div>
+     <section class="our-menu py-5 my-5" id="our-menu">
+    <div class="container">
+        <div class="row" data-aos="fade-right">
+            <div class="section-title text-center">
+                <h5>Our Menu</h5>
+                <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
             </div>
-            <div class="row position-relative">
-                <div class="slider slider-indicators-wrapper justify-content-center">
-                    {% for menu in menu_items %}
-                    <div class="slider-indicators" onclick="showFoodItems('{{ menu.name }}')">
-                        <div class="indicators-icon text-center">
-                            <i class="{{ menu.icon_class.value }} fa-2x"></i>
-                        </div>
-                        <div class="indicators-title text-center">
-                            <h5>{{ menu.name }}</h5>
+        </div>
+        <div class="row position-relative">
+            <div class="slider slider-indicators-wrapper justify-content-center">
+                {% for menu in menu_items %}
+                <div class="slider-indicators" onclick="showFoodItems('{{ menu.name }}')">
+                    <div class="indicators-icon text-center">
+                        <i class="{{ menu.icon_class.value }} fa-2x"></i>
+                    </div>
+                    <div class="indicators-title text-center">
+                        <h5>{{ menu.name }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="our-menus" class="slider">
+            {% for food in food_items %}
+            <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
+                <div class="row my-5 py-1 justify-content-center align-items-center">
+                    <div class="col-lg-2">
+                        <div style="width: 400px;">
+                            {% if food.image %}
+                                <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
+                            {% elif food.image_url %}
+                                <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
+                            {% else %}
+                                <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
+                            {% endif %}
                         </div>
                     </div>
-                    {% endfor %}
+                    <div class="col-lg-7">
+                        <div class="item-wrapper d-flex justify-content-between">
+                            <div class="item-left">
+                                <h5>{{ food.name }}</h5>
+                                <p>{{ food.description }}</p>
+                            </div>
+                            <div class="item-right">
+                                {% if food.price %}
+                                    <span class="item-price">
+                                        <span class="price-symbol">$</span>
+                                        {{ food.price }}
+                                    </span>
+                                {% else %}
+                                    <span class="item-price">Price not available</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="our-menus" class="slider">
-              {% for food in food_items %}
-              <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
-                  <div class="row my-5 py-1 justify-content-center align-items-center">
-                      <div class="col-lg-2">
-                          <div style="width: 400px;">
-                              {% if food.image %}
-                                  <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
-                              {% elif food.image_url %}
-                                  <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
-                              {% else %}
-                                  <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
-                              {% endif %}
-                          </div>
-                      </div>
-                      <div class="col-lg-7">
-                          <div class="item-wrapper d-flex justify-content-between">
-                              <div class="item-left">
-                                  <h5>{{ food.name }}</h5>
-                                  <p>{{ food.description }}</p>
-                              </div>
-                              <div class="item-right">
-                                  {% if food.price %}
-                                      <span class="item-price">
-                                          <span class="price-symbol">$</span>
-                                          {{ food.price }}
-                                      </span>
-                                  {% else %}
-                                      <span class="item-price">Price not available</span>
-                                  {% endif %}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              {% endfor %}
-          </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 
   <section class="testimonials py-5 my-5">
     <div class="container py-5">
@@ -548,77 +548,77 @@
     <script src="{% static 'assets/js/script.js' %}"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-    const originalFoodItems = Array.from(document.querySelectorAll('.food-item'));
-    const breakfastItems = [];
-    const lunchItems = [];
-    const dinnerItems = [];
-    const drinksItems = [];
-    const ingredientsItems = [];
-    
-    // Populate the arrays based on the menu name
-    originalFoodItems.forEach(item => {
-        const itemMenuName = item.getAttribute('data-menu-name');
-        switch (itemMenuName) {
-            case 'Breakfast':
-                breakfastItems.push(item);
-                break;
-            case 'Lunch':
-                lunchItems.push(item);
-                break;
-            case 'Dinner':
-                dinnerItems.push(item);
-                break;
-            case 'Drinks':
-                drinksItems.push(item);
-                break;
-            case 'Ingredients':
-                ingredientsItems.push(item);
-                break;
-        }
-    });
-
-    function showFoodItems(menuName) {
-        console.log('Selected menu:', menuName); // Debugging line
-        // Hide all items
-        originalFoodItems.forEach(item => {
-            item.classList.add('hidden');
-        });
-
-        // Show items based on the selected menu
-        let itemsToShow = [];
-        switch (menuName) {
-            case 'Breakfast':
-                itemsToShow = breakfastItems;
-                break;
-            case 'Lunch':
-                itemsToShow = lunchItems;
-                break;
-            case 'Dinner':
-                itemsToShow = dinnerItems;
-                break;
-            case 'Drinks':
-                itemsToShow = drinksItems;
-                break;
-            case 'Ingredients':
-                itemsToShow = ingredientsItems;
-                break;
-        }
-
-        itemsToShow.forEach(item => {
-            item.classList.remove('hidden');
-            console.log('Showing:', item.getAttribute('data-menu-name'));
-        });
-    }
-
-    window.showFoodItems = showFoodItems; // Make the function globally accessible
-
-    const firstMenu = document.querySelector('.slider-indicators'); // Select the first menu indicator
-    if (firstMenu) {
-        const initialMenuName = firstMenu.getAttribute('onclick').match(/'([^']+)'/)[1];
-        showFoodItems(initialMenuName);
-    }
-});
-  </script>
+          const originalFoodItems = Array.from(document.querySelectorAll('.food-item'));
+          const breakfastItems = [];
+          const lunchItems = [];
+          const dinnerItems = [];
+          const drinksItems = [];
+          const ingredientsItems = [];
+      
+          // Populate the arrays based on the menu name
+          originalFoodItems.forEach(item => {
+              const itemMenuName = item.getAttribute('data-menu-name');
+              switch (itemMenuName) {
+                  case 'Breakfast':
+                      breakfastItems.push(item);
+                      break;
+                  case 'Lunch':
+                      lunchItems.push(item);
+                      break;
+                  case 'Dinner':
+                      dinnerItems.push(item);
+                      break;
+                  case 'Drinks':
+                      drinksItems.push(item);
+                      break;
+                  case 'Ingredients':
+                      ingredientsItems.push(item);
+                      break;
+              }
+          });
+      
+          function showFoodItems(menuName) {
+              console.log('Selected menu:', menuName); // Debugging line
+              // Hide all items
+              originalFoodItems.forEach(item => {
+                  item.classList.add('hidden');
+              });
+      
+              // Show items based on the selected menu
+              let itemsToShow = [];
+              switch (menuName) {
+                  case 'Breakfast':
+                      itemsToShow = breakfastItems;
+                      break;
+                  case 'Lunch':
+                      itemsToShow = lunchItems;
+                      break;
+                  case 'Dinner':
+                      itemsToShow = dinnerItems;
+                      break;
+                  case 'Drinks':
+                      itemsToShow = drinksItems;
+                      break;
+                  case 'Ingredients':
+                      itemsToShow = ingredientsItems;
+                      break;
+              }
+      
+              itemsToShow.forEach(item => {
+                  item.classList.remove('hidden');
+                  console.log('Showing:', item.getAttribute('data-menu-name')); // Debugging line
+              });
+          }
+      
+          window.showFoodItems = showFoodItems; // Make the function globally accessible
+      
+          const firstMenu = document.querySelector('.slider-indicators'); // Select the first menu indicator
+          if (firstMenu) {
+              const initialMenuName = firstMenu.getAttribute('onclick').match(/'([^']+)'/)[1];
+              showFoodItems(initialMenuName);
+          }
+      });
+      </script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
