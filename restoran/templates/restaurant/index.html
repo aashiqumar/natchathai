@@ -255,42 +255,42 @@
             </div>
         </div>
         <div id="our-menus" class="slider">
-            {% for food in food_items %}
-            <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
-                <div class="row my-5 py-1 justify-content-center align-items-center">
-                    <div class="col-lg-2">
-                        <div style="width: 400px;">
-                            {% if food.image %}
-                                <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
-                            {% elif food.image_url %}
-                                <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
-                            {% else %}
-                                <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="item-wrapper d-flex justify-content-between">
-                            <div class="item-left">
-                                <h5>{{ food.name }}</h5>
-                                <p>{{ food.description }}</p>
-                            </div>
-                            <div class="item-right">
-                                {% if food.price %}
-                                    <span class="item-price">
-                                        <span class="price-symbol">$</span>
-                                        {{ food.price }}
-                                    </span>
-                                {% else %}
-                                    <span class="item-price">Price not available</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+          {% for food in food_items %}
+          <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
+              <div class="row my-5 py-1 justify-content-center align-items-center">
+                  <div class="col-lg-2">
+                      <div style="width: 400px;">
+                          {% if food.image %}
+                              <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
+                          {% elif food.image_url %}
+                              <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
+                          {% else %}
+                              <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
+                          {% endif %}
+                      </div>
+                  </div>
+                  <div class="col-lg-7">
+                      <div class="item-wrapper d-flex justify-content-between">
+                          <div class="item-left">
+                              <h5>{{ food.name }}</h5>
+                              <p>{{ food.description }}</p>
+                          </div>
+                          <div class="item-right">
+                              {% if food.price %}
+                                  <span class="item-price">
+                                      <span class="price-symbol">$</span>
+                                      {{ food.price }}
+                                  </span>
+                              {% else %}
+                                  <span class="item-price">Price not available</span>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
     </div>
 </section>
 
@@ -549,31 +549,19 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
           const originalFoodItems = Array.from(document.querySelectorAll('.food-item'));
-          const breakfastItems = [];
-          const lunchItems = [];
-          const dinnerItems = [];
-          const drinksItems = [];
-          const ingredientsItems = [];
+          const foodItemsByMenu = {
+              'Breakfast': [],
+              'Lunch': [],
+              'Dinner': [],
+              'Drinks': [],
+              'Ingredients': []
+          };
       
           // Populate the arrays based on the menu name
           originalFoodItems.forEach(item => {
               const itemMenuName = item.getAttribute('data-menu-name');
-              switch (itemMenuName) {
-                  case 'Breakfast':
-                      breakfastItems.push(item);
-                      break;
-                  case 'Lunch':
-                      lunchItems.push(item);
-                      break;
-                  case 'Dinner':
-                      dinnerItems.push(item);
-                      break;
-                  case 'Drinks':
-                      drinksItems.push(item);
-                      break;
-                  case 'Ingredients':
-                      ingredientsItems.push(item);
-                      break;
+              if (foodItemsByMenu[itemMenuName]) {
+                  foodItemsByMenu[itemMenuName].push(item);
               }
           });
       
@@ -585,25 +573,7 @@
               });
       
               // Show items based on the selected menu
-              let itemsToShow = [];
-              switch (menuName) {
-                  case 'Breakfast':
-                      itemsToShow = breakfastItems;
-                      break;
-                  case 'Lunch':
-                      itemsToShow = lunchItems;
-                      break;
-                  case 'Dinner':
-                      itemsToShow = dinnerItems;
-                      break;
-                  case 'Drinks':
-                      itemsToShow = drinksItems;
-                      break;
-                  case 'Ingredients':
-                      itemsToShow = ingredientsItems;
-                      break;
-              }
-      
+              const itemsToShow = foodItemsByMenu[menuName] || [];
               itemsToShow.forEach(item => {
                   item.classList.remove('hidden');
                   console.log('Showing:', item.getAttribute('data-menu-name')); // Debugging line
