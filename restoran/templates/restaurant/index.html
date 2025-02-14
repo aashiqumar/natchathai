@@ -1,0 +1,636 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restoran</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <style>
+      header.scrolled .menus > ul > li::after {
+        background-color: var(--text-color-white);
+      }
+      
+    </style>
+  </head>
+  <body>
+
+    <div class="loader">
+      <img style="height: 200px; width: 200px; margin-bottom: 30px;" src="{% static 'assets/images/natcha-loader.jpeg' %}" alt="Loader Icon" class="loader-icone">
+      <p>Natchathai</p>
+      <div class="loader-ellipses">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <header>
+      <div class="container header my-3 d-none d-lg-flex">
+        <div class="logo">
+          <a href="./index.html">
+            <img style="height: 50px; width: 50px; margin-bottom: 30px;" src="{% static 'assets/images/natcha-loader.png' %}" alt="Loader Icon">
+            <h1 class="mb-0">Natchathai</h1>
+          </a>
+        </div>
+        <div class="menus">
+          <ul class="d-flex mb-0">
+            <li class="list-unstyled py-2">
+              <a class="text-decoration-none text-uppercase p-4" href="#index"
+                >Home</a
+              >
+            </li>
+            <li class="list-unstyled py-2">
+              <a class="text-decoration-none text-uppercase p-4" href="#about-us"
+                >About</a
+              >
+            </li>
+            <li class="list-unstyled py-2">
+              <a class="text-decoration-none text-uppercase p-4" href="#reservation"
+                >Reservation</a
+              >
+            </li>
+            <li class="list-unstyled py-2">
+              <a class="text-decoration-none text-uppercase p-4" href="#our-menu"
+                >Menu</a
+              >
+            </li>
+            <li class="list-unstyled py-2">
+              <a class="text-decoration-none text-uppercase p-4" href="#contact"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="icons">
+          <a class="text-decoration-none" id="searchBtn" href="#">
+            <i class="fa fa-search me-3"></i>
+          </a>
+          <a class="text-decoration-none" id="shoppingbutton" href="#">
+            <i class="fa fa-shopping-bag me-3"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-around py-3 align-items-center d-lg-none">
+        <div id="hamburger">
+          <i class="fa fa-2x fa-bars me-3 text-white"></i>
+        </div>
+        <div class="mobile-nav-logo">
+          <div class="logo">
+            <a href="./index.html">
+              <i class="fa fa-utensils me-3"></i>
+              <h1 class="mb-0">Restoran</h1>
+            </a>
+          </div>
+        </div>
+        <div class="mobile-nav-icons">
+          <div class="icons">
+            <a class="text-decoration-none" id="searchBtnMobile" href="#">
+              <i class="fa fa-search me-3"></i>
+            </a>
+            <a class="text-decoration-none" id="shoppingbuttonMobile" href="#">
+              <i class="fa fa-shopping-bag me-3"></i>
+            </a>
+          </div>
+        </div>
+        <div class="position-fixed w-75 bg-white h-100 top-0 start-0" id="mobile-menu">
+          <div id="hamburger-cross" class="d-flex justify-content-end align-items-center py-2">
+              <i class="fa fa-2x fa-plus me-3 "></i>
+          </div>
+          <div class="menus">
+              <ul class="d-flex flex-column ps-2 mb-0 mt-4">
+                  <li class="list-unstyled py-2">
+                      <a class="text-dark text-decoration-none text-uppercase p-4" href="#home">Home</a>
+                  </li>
+                  <li class="list-unstyled py-2">
+                      <a class="text-dark text-decoration-none text-uppercase p-4" href="#about-us">About</a>
+                  </li>
+                  <li class="list-unstyled py-2">
+                      <a class="text-dark text-decoration-none text-uppercase p-4" href="#reservation">Reservation</a>
+                  </li>
+                  <li class="list-unstyled py-2">
+                      <a class="text-dark text-decoration-none text-uppercase p-4" href="#our-menu">Menu</a>
+                  </li>
+                  <li class="list-unstyled py-2">
+                      <a class="text-dark text-decoration-none text-uppercase p-4" href="#contact">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      </div>
+    </header>
+
+    <div class="search-bar d-none" id="search-container">
+      <div class="close-btn" id="search-close-btn">
+        <i class="fa fa-close"></i>
+      </div>
+      <div class="search-bar-wrapper">
+        <input type="search" placeholder="Enter any text here..." />
+        <div class="search-button">
+          <a href="#"><i class="fa fa-search"></i></a>
+        </div>
+      </div>
+    </div>
+
+    
+    <main>
+      <section class="banner py-5" id="index">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-6 banner-content pe-5" data-aos="fade-right" data-aos-delay="3000">
+                    <h1 class="display-2">{{ banner_content.header }} <br>{{ banner_content.header2 }}</br></h1>
+                    <p>{{ banner_content.paragraph1 }}</p>
+                    <div class="book-a-table">
+                        <div class="anim-layer"></div>
+                        <a href="#">Book a table</a>
+                    </div>
+                </div>
+                <div class="col-md-6 banner-img" data-aos="fade-left" data-aos-delay="3000">
+                  <img class="img img-fluid mt-5 mt-lg-0" src="{% static 'assets/images/banner-img.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    <section class="services my-5 py-5">
+      <div class="container">
+          <div class="row gy-4">
+              {% for service in services %}
+                  <div class="col-md-3">
+                      <div class="cards px-4 py-5" data-aos="fade-right">
+                          <div class="anim-layer"></div>
+                          <div class="icon">
+                              <i class="fa fa-3x {{ service.icon.value }} mb-4"></i>
+                          </div>
+                          <div class="heading">
+                              <h5>{{ service.heading }}</h5>
+                          </div>
+                          <div class="para">
+                              <p>{{ service.description }}</p>
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+  </section>
+
+      <section class="about-us py-5 my-5" id="about-us">
+        <div class="container">
+            <div class="row gy-5 g-lg-5 align-items-center">
+                <div class="col-lg-6 about-img-box">
+                    <div class="row g-3">
+                        <div class="col-6" data-aos="fade-right">
+                            <img class="img-fluid rounded w-100" src="{{ about_us.image1 }}">
+                        </div>
+                        <div class="col-6 text-right" data-aos="fade-down">
+                            <img class="img-fluid rounded w-75" src="{{ about_us.image2 }}">
+                        </div>
+                        <div class="col-6 text-end" data-aos="fade-right">
+                            <img class="img-fluid rounded w-75" src="{{ about_us.image3 }}">
+                        </div>
+                        <div class="col-6 text-end" data-aos="fade-up">
+                            <img class="img-fluid rounded w-100" src="{{ about_us.image4 }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 about-content" data-aos="fade-left">
+                    <h5 class="section-title">About Us</h5>
+                    <h2 class="mb-4 dis">Welcome to <i class="fa fa-utensils me-2"></i>Natcha</h2>
+                    <p class="mb-4">{{ about_us.paragraph1 }}</p>
+                    <p class="mb-4">{{ about_us.paragraph2 }}</p>
+                    <div class="row g-4 mb-4 about-extra">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center px-3 about-experience">
+                                <h1 class="flex-shrink-0 mb-0">{{ about_us.experience_years }}</h1>
+                                <div class="ps-4">
+                                    <p class="mb-0">Years of</p>
+                                    <h6 class="text-uppercase mb-0">Experience</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <section class="our-menu py-5 my-5" id="our-menu">
+        <div class="container">
+            <div class="row" data-aos="fade-right">
+                <div class="section-title text-center">
+                    <h5>Our Menu</h5>
+                    <h2 class="display-5 fw-bold">Tasty And Good Price</h2>
+                </div>
+            </div>
+            <div class="row position-relative">
+                <div class="slider slider-indicators-wrapper justify-content-center">
+                    {% for menu in menu_items %}
+                    <div class="slider-indicators" onclick="showFoodItems('{{ menu.name }}')">
+                        <div class="indicators-icon text-center">
+                            <i class="{{ menu.icon_class.value }} fa-2x"></i>
+                        </div>
+                        <div class="indicators-title text-center">
+                            <h5>{{ menu.name }}</h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="our-menus" class="slider">
+              {% for food in food_items %}
+              <div class="food-item hidden" data-menu-name="{{ food.menu.name }}">
+                  <div class="row my-5 py-1 justify-content-center align-items-center">
+                      <div class="col-lg-2">
+                          <div style="width: 400px;">
+                              {% if food.image %}
+                                  <img width="40%" src="{{ food.image.url }}" alt="{{ food.name }}">
+                              {% elif food.image_url %}
+                                  <img width="40%" src="{{ food.image_url }}" alt="{{ food.name }}">
+                              {% else %}
+                                  <img width="40%" src="{% static 'assets/images/default-food-image.png' %}" alt="Default Image">
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="col-lg-7">
+                          <div class="item-wrapper d-flex justify-content-between">
+                              <div class="item-left">
+                                  <h5>{{ food.name }}</h5>
+                                  <p>{{ food.description }}</p>
+                              </div>
+                              <div class="item-right">
+                                  {% if food.price %}
+                                      <span class="item-price">
+                                          <span class="price-symbol">$</span>
+                                          {{ food.price }}
+                                      </span>
+                                  {% else %}
+                                      <span class="item-price">Price not available</span>
+                                  {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+    </section>
+
+  <section class="testimonials py-5 my-5">
+    <div class="container py-5">
+        <div class="row" data-aos="fade-right">
+            <div class="section-title text-center">
+                <h5>Testimonial</h5>
+                <h2 class="display-5 fw-bold">Our Customer Says</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div data-aos="fade-up">
+                <div class="pt-4 pb-4 mx-4">
+                    <div class="row">
+                        {% for testimonial in testimonials %}
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 border-primary">
+                                <div class="card-body">
+                                    <div class="testi-content">
+                                        <p class="card-text">{{ testimonial.content }}</p>
+                                    </div>
+                                    <div class="testi-info mt-4">
+                                        <h5 class="card-title">{{ testimonial.name }}</h5>
+                                        <p class="card-subtitle text-muted">{{ testimonial.position }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="reservation" id="reservation">
+    <img class="d-md-none d-lg-block" src="{% static 'assets/images/find-a-table.png' %}" alt="">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 py-5 reservation-content px-5" data-aos="fade-right">
+                <div class="reservation-column py-5 px-3">
+                    <h2 class="text-center text-white display-6 fw-bold">Make A Reservation</h2>
+                    <p class="text-center text-white">You can call us directly at <span>225-88888</span></p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <div class="row mt-5 pt-3">
+                            <div class="col-12 col-lg-6">
+                                <div class="input d-flex align-items-center">
+                                    <i class="fa fa-user py-2 px-3"></i>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                                <div class="input d-flex align-items-center">
+                                    <i class="fa fa-phone py-2 px-3"></i>
+                                    {{ form.phone_number }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12 col-lg-6">
+                                <div class="input d-flex align-items-center">
+                                    <i class="fa fa-users py-2 px-3"></i>
+                                    {{ form.number_of_people }}
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+                                <div class="input d-flex align-items-center">
+                                    <i class="fa fa-calendar py-2 px-3"></i>
+                                    {{ form.date }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12 col-lg-6">
+                                <div class="input d-flex align-items-center">
+                                    <i class="fa fa-clock py-2 px-3"></i>
+                                    {{ form.time }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-5 pt-3">
+                            <div>
+                                <div></div>
+                                <button type="submit" class="btn btn-primary">Find Table</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-md-block reservation-bg" data-aos="fade-left"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="reservationModalLabel">Reservation Status</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  {% if messages %}
+                      {% for message in messages %}
+                          <p style="color: black;">{{ message }}</p>
+                      {% endfor %}
+                  {% endif %}
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="our-gallery pt-5">
+  <div class="container-fluid pt-5">
+    <div class="row">
+      <div class="section-title text-center" data-aos="fade-right">
+        <h5>Our Gallery</h5>
+        <h2 class="text-white display-6 fw-bold">Fooday Hot Dishes</h2>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-3 p-0">
+        <div data-aos="fade-down-right" class="gallery-image gallery-image-one"></div>
+      </div>
+      <div class="col-md-6 p-0">
+        <div class="row m-0">
+          <div class="col-md-8 p-0">
+            <div data-aos="fade-down" class="gallery-image-two"></div>
+          </div>
+          <div class="col-md-4 p-0">
+            <div data-aos="fade-down" class="gallery-image-three"></div>
+          </div>
+        </div>
+        <div class="row m-0">
+          <div class="col-md-4 p-0">
+            <div data-aos="fade-up" class="gallery-image-five"></div>
+          </div>
+          <div class="col-md-8 p-0">
+            <div data-aos="fade-up" class="gallery-image-six"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 p-0">
+        <div data-aos="fade-up-left" class="gallery-image gallery-image-four"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    </main>
+    
+
+    <a href="#" id="back-to-top">
+      <i class="fa-solid fa-angles-up"></i>
+    </a>
+
+    
+    <footer>
+      <div class="container"> 
+        <div class="row">
+            <div class="footer-content col-xl-8 px-4">
+                <div class="row">
+                    <div class="col-lg-6 px-0">
+                        <div class="logo" data-aos="fade-down-right">
+                            <a href="./index.html">
+                                <i class="fa fa-utensils me-3"></i>
+                                <h1 class="mb-0">Restoran</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div data-aos="fade-down" class="col-lg-6 pt-4 pt-lg-0 d-flex align-items-center justify-content-start justify-content-lg-end">
+                        <div class="social-icons d-flex">
+                            <ul class="d-flex mb-0 ps-0">
+                                {% for link in social_media_links %}
+                                    <li class="mx-2"><a class="text-decoration-none text-white" href="{{ link.url }}"><i class="fab {{ link.icon }}"></i></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-5 content-desc" data-aos="fade-right">
+                    <p class="px-0">{{ footer_content.description }}</p>
+                </div>
+                <div class="row" data-aos="fade-right">
+                    <div class="d-flex flex-column flex-lg-row px-0 justify-content-between">
+                        <div class="location d-flex align-items-center pe-2 py-3">
+                            <i class="fa-solid fa-location-dot text-white fa-2x border-bottom pb-2"></i>
+                            <div class="ps-3">
+                                <p class="mb-0">{{ footer_content.address }}</p>
+                            </div>
+                        </div>
+                        <div class="location d-flex align-items-center pe-2 py-3">
+                            <i class="fa-solid fa-mobile text-white fa-2x border-bottom pb-2"></i>
+                            <div class="ps-3">
+                                <p class="mb-0">{{ footer_content.phone_number }}</p>
+                            </div>
+                        </div>
+                        <div class="location d-flex align-items-center pe-2 py-3">
+                            <i class="fa-solid fa-envelope text-white fa-2x border-bottom pb-2"></i>
+                            <div class="ps-3">
+                                <p class="mb-0">{{ footer_content.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="reservation-box" data-aos="fade-down-left">
+                    <div class="reservation-wrapper">
+                        <h2>Open Hour</h2>
+                        <div class="reservation-date-time">
+                            {{ footer_content.open_hours|linebreaksbr }}
+                        </div>
+                        <h2 class="pb-2">Reservation Numbers</h2>
+                        <h3>{{ footer_content.reservation_number }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p class="text-center pt-4 mt-3 pt-lg-0">&copy; <span id="copyrightCurrentYear"></span> <b> Restoran.</b> All rights reserved. Design by Powered by<a href="https://www.ideafordge.com/" class="fw-bold author-name">Ideafordge</a></p>
+        </div>
+    </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const originalFoodItems = Array.from(document.querySelectorAll('.food-item'));
+    const breakfastItems = [];
+    const lunchItems = [];
+    const dinnerItems = [];
+    const drinksItems = [];
+    const ingredientsItems = [];
+    
+    // Populate the arrays based on the menu name
+    originalFoodItems.forEach(item => {
+        const itemMenuName = item.getAttribute('data-menu-name');
+        switch (itemMenuName) {
+            case 'Breakfast':
+                breakfastItems.push(item);
+                break;
+            case 'Lunch':
+                lunchItems.push(item);
+                break;
+            case 'Dinner':
+                dinnerItems.push(item);
+                break;
+            case 'Drinks':
+                drinksItems.push(item);
+                break;
+            case 'Ingredients':
+                ingredientsItems.push(item);
+                break;
+        }
+    });
+
+    function showFoodItems(menuName) {
+        console.log('Selected menu:', menuName); // Debugging line
+        // Hide all items
+        originalFoodItems.forEach(item => {
+            item.classList.add('hidden');
+        });
+
+        // Show items based on the selected menu
+        let itemsToShow = [];
+        switch (menuName) {
+            case 'Breakfast':
+                itemsToShow = breakfastItems;
+                break;
+            case 'Lunch':
+                itemsToShow = lunchItems;
+                break;
+            case 'Dinner':
+                itemsToShow = dinnerItems;
+                break;
+            case 'Drinks':
+                itemsToShow = drinksItems;
+                break;
+            case 'Ingredients':
+                itemsToShow = ingredientsItems;
+                break;
+        }
+
+        itemsToShow.forEach(item => {
+            item.classList.remove('hidden');
+            console.log('Showing:', item.getAttribute('data-menu-name'));
+        });
+    }
+
+    window.showFoodItems = showFoodItems; // Make the function globally accessible
+
+    const firstMenu = document.querySelector('.slider-indicators'); // Select the first menu indicator
+    if (firstMenu) {
+        const initialMenuName = firstMenu.getAttribute('onclick').match(/'([^']+)'/)[1];
+        showFoodItems(initialMenuName);
+    }
+});
+  </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            {% if messages %}
+                $('#reservationModal').modal('show');
+            {% endif %}
+        });
+    </script>
+  
+  
+  </body>
+</html>

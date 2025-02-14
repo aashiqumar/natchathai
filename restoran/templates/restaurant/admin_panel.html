@@ -1,0 +1,22 @@
+{% extends 'restaurant/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Admin Dashboard</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Pending Reservations</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ pending_bookings }}</h4>
+                    <p class="card-text">Table reservations waiting for approval.</p>
+                    <a href="{% url 'booking' %}" class="btn btn-light">View</a>
+                </div>
+            </div>
+        </div>
+        
+    
+    </div>
+</div>
+{% endblock %}

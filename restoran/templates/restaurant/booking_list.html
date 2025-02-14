@@ -1,0 +1,39 @@
+{% extends 'restaurant/base.html' %}
+{% block title %}Manage Bookings{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Manage Table Bookings</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Table</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.customer_name }}</td>
+                <td>Table {{ booking.table.number }}</td>
+                <td>{{ booking.reservation_time }}</td>
+                <td>
+                    {% if booking.approved %}
+                        <span class="badge bg-success">Approved</span>
+                    {% else %}
+                        <span class="badge bg-danger">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'approve_booking' booking.id %}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{% url 'reject_booking' booking.id %}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

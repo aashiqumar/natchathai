@@ -1,0 +1,42 @@
+[
+    {
+        "model": "restoran.masterdata",
+        "pk": 1,
+        "fields": {
+            "category_code": "icon",
+            "value": "fas fa-coffee fa-2x"
+        }
+    },
+    {
+        "model": "restoran.masterdata",
+        "pk": 2,
+        "fields": {
+            "category_code": "icon",
+            "value": "fas fa-utensils fa-2x"
+        }
+    },
+    {
+        "model": "restoran.masterdata",
+        "pk": 3,
+        "fields": {
+            "category_code": "icon",
+            "value": "fas fa-hamburger fa-2x"
+        }
+    },
+    {
+        "model": "restoran.masterdata",
+        "pk": 4,
+        "fields": {
+            "category_code": "icon",
+            "value": "fas fa-ice-cream fa-2x"
+        }
+    },
+    {
+        "model": "restoran.masterdata",
+        "pk": 5,
+        "fields": {
+            "category_code": "icon",
+            "value": "fas fa-cocktail fa-2x"
+        }
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "model": "restoran.footercontent",
+        "pk": 1,
+        "fields": {
+            "address": "157 White Oak Drive Kansas City\n689 Lynn Street South Boston",
+            "phone_number": "(617)-276-8031",
+            "email": "admin@fooday.com",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure dolor.",
+            "open_hours": "Tuesday: 7AM - 9PM\nWednesday: 7AM - 9PM\nThursday: 7AM - 9PM\nFriday: 7AM - 9PM\nSaturday: 7AM - 9PM\nSunday: 7AM - 9PM\nMonday: Close",
+            "reservation_number": "(617)-276-8031"
+        }
+    },
+    {
+        "model": "restoran.socialmedia",
+        "pk": 1,
+        "fields": {
+            "icon": "fa-facebook",
+            "url": "https://facebook.com"
+        }
+    },
+    {
+        "model": "restoran.socialmedia",
+        "pk": 2,
+        "fields": {
+            "icon": "fa-twitter",
+            "url": "https://twitter.com"
+        }
+    },
+    {
+        "model": "restoran.socialmedia",
+        "pk": 3,
+        "fields": {
+            "icon": "fa-pinterest",
+            "url": "https://pinterest.com"
+        }
+    },
+    {
+        "model": "restoran.socialmedia",
+        "pk": 4,
+        "fields": {
+            "icon": "fa-google-plus",
+            "url": "https://plus.google.com"
+        }
+    }
+]
